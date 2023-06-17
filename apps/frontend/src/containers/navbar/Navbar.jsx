@@ -1,16 +1,30 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { authSelector } from '../../../store/store';
+import { useEffect } from 'react';
+import { signout } from '../../../lib/pocketbase';
 
 
 const Navbar = () => {
+
+  const model = useSelector(authSelector)
+
+  const logout = () => {
+    signout();
+  }
+
+  useEffect(() => {
+    console.log("User: ", model);
+  }, [model])
 
   return (
   <div className="navbar bg-base-100 flex justify-between">
     <Link to={""} className=" btn btn-ghost normal-case text-3xl font-bold"><span className='text-primary'>Muslim</span>Tutors</Link>
     <nav className='hidden justify-between min-w-[40%] md:flex sm-justify-between'>
-      <Link className=''>Portal</Link>
+      <Link to={"portal"} className=''>Portal</Link>
       <Link to={"join-us"} className=''>Join Us</Link>
       <Link to={"join-the-team"} className=''>Join the team</Link>
-      <Link className=''>Contact us</Link>
+      <Link to={"contact"} className=''>Contact us</Link>
     </nav>
     <div>
     <details className="dropdown flex md:hidden">
@@ -28,9 +42,13 @@ const Navbar = () => {
     <div className="flex">
       <ul className="menu menu-horizontal px-1">
         <li>
-          <button className='hidden sm:flex text-1xl btn w-[10rem] p-4 items-center text-center'>
-            <Link to={"login"}>Login</Link>
-          </button>
+            <Link className={`hidden ${model === null ? "sm:flex" : "sm:hidden"} text-1xl btn w-[10rem] p-4 items-center text-center`} to={model === null ? "login" : ""}>
+              Login
+            </Link>
+            <button onClick={logout} className={`hidden ${model !== null ? "sm:flex" : "sm:hidden"} text-1xl btn w-[10rem] p-4 items-center text-center`}>
+              Logout
+            </button>
+
         </li>
       </ul>
     </div>

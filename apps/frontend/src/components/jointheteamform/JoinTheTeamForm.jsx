@@ -17,7 +17,7 @@ const JoinTheTeamForm = ({
     <form onSubmit={handleSubmit} className='bg-base-100 p-20 w-full flex flex-col sm:flex-row flex-1 justify-evenly'>
       <div className='flex flex-col justify-between h-[110%]'>
         <input onChange={({target}) => setEmail(target.value)} value={email} placeholder='Email' className='m-2 input input-bordered w-full max-w-xs' type="email" required/>
-        <input onChange={({target}) => setPassword(target.value)} value={password} placeholder='Password' className='m-2 p-5 input input-bordered w-full max-w-xs' type="password" required minLength={7}/> 
+        <input onChange={({target}) => setPassword(target.value)} value={password} placeholder='Password' className='m-2 p-5 input input-bordered w-full max-w-xs' type="password" required minLength={8} maxLength={72}/> 
         <input onChange={({target}) => setFirstName(target.value)} value={firstName} placeholder='First Name' className='m-2 input input-bordered w-full max-w-xs' type="text" required />
         <input onChange={({target}) => setLastName(target.value)} value={lastName} placeholder='Last Name' className='m-2 input input-bordered w-full max-w-xs' type="text" required/>
         <input onChange={({target}) => setNumber(target.value)} value={number} pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$" placeholder='Phone Number' className='m-2 input input-bordered w-full max-w-xs' type='tel' required/>

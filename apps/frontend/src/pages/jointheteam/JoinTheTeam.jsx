@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import JoinTheTeamForm from '../../components/jointheteamform/JoinTheTeamForm'
+import { signUpTeacher } from '../../../lib/pocketbase';
 
 const JoinTheTeam = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,10 +16,18 @@ const JoinTheTeam = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // connect to pocketbase
-    // create a new entry to teacher table with the form information
-    // make it as not active
-    // they start of with an empty list of students
+    signUpTeacher({
+      firstName,
+      lastName,
+      email,
+      password,
+      number,
+      qualifications: qual,
+      male,
+      houseNumber,
+      street,
+      postCode
+    })
   }
 
   return (
